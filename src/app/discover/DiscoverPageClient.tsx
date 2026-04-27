@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 import { AppScreenLayout } from "@/components/resona/AppScreenLayout";
 import { PlaylistCard } from "@/components/resona/PlaylistCard";
@@ -29,21 +29,14 @@ export default function DiscoverPageClient() {
     });
   }, [searchQuery, selectedPlaylist]);
 
-  useEffect(() => {
-    const firstTrack = visibleTracks[0];
-    if (!firstTrack) {
-      return;
-    }
-
-    const isSelectedTrackVisible = visibleTracks.some((track) => track.id === selectedTrackId);
-    if (!isSelectedTrackVisible) {
-      setSelectedTrackId(firstTrack.id);
-    }
-  }, [visibleTracks, selectedTrackId]);
+  const effectiveSelectedTrackId =
+    visibleTracks.some((track) => track.id === selectedTrackId)
+      ? selectedTrackId
+      : visibleTracks[0]?.id ?? selectedPlaylist.tracks[0]?.id;
 
   const selectedTrack =
-    visibleTracks.find((track) => track.id === selectedTrackId) ??
-    selectedPlaylist.tracks.find((track) => track.id === selectedTrackId) ??
+    visibleTracks.find((track) => track.id === effectiveSelectedTrackId) ??
+    selectedPlaylist.tracks.find((track) => track.id === effectiveSelectedTrackId) ??
     selectedPlaylist.tracks[0];
 
   return (
@@ -51,6 +44,7 @@ export default function DiscoverPageClient() {
       navLinks={[
         { label: "Discover", href: "/discover" },
         { label: "Library", href: "/library" },
+        { label: "Now Playing", href: "/now-playing" },
         { label: "GitHub", href: "https://github.com", external: true },
       ]}
       nowPlaying={selectedTrack?.name ?? "No track selected"}
@@ -114,7 +108,7 @@ export default function DiscoverPageClient() {
               <TrackRow
                 key={track.id}
                 {...track}
-                isActive={selectedTrack?.id === track.id}
+                isActive={effectiveSelectedTrackId === track.id}
                 onClick={() => setSelectedTrackId(track.id)}
               />
             ))}
