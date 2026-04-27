@@ -24,6 +24,7 @@ export default function LibraryPage() {
       navLinks={[
         { label: "Discover", href: "/discover" },
         { label: "Library", href: "/library" },
+        { label: "Now Playing", href: "/now-playing" },
         { label: "GitHub", href: "https://github.com", external: true },
       ]}
       nowPlaying="Signal Bloom"
