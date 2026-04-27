@@ -19,6 +19,7 @@ export default function Home() {
           className="mb-16"
           links={[
             { label: "Discover", href: "/discover" },
+            { label: "Now Playing", href: "/now-playing" },
             { label: "GitHub", href: "https://github.com", external: true },
           ]}
         />
@@ -28,21 +29,22 @@ export default function Home() {
 
           <section className="relative z-10 max-w-2xl">
             <p className="mb-4 inline-flex rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-zinc-300">
-              Open music streaming, your way
+              Privacy-first open music streaming
             </p>
             <h1 className="text-4xl font-semibold leading-tight tracking-tight text-white sm:text-5xl">
-              Stream freely with privacy at the core.
+              Find your next track, then press play.
             </h1>
             <p className="mt-5 text-base leading-7 text-zinc-300 sm:text-lg">
-              Resona is the open-source music platform built for modern listeners, blending smart discovery with a calm, privacy-first experience.
+              Resona is an open-source music app with smart discovery and a shared listening session across
+              Discover, Library, and Now Playing.
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <a
                 className="inline-flex h-11 items-center justify-center rounded-full bg-white px-6 text-sm font-medium text-zinc-900 transition hover:bg-zinc-200"
-                href="#"
+                href="/discover"
               >
-                Explore demo
+                Start listening in Discover
               </a>
               <a
                 className="inline-flex h-11 items-center justify-center rounded-full border border-white/20 bg-white/5 px-6 text-sm font-medium text-zinc-100 transition hover:border-white/35 hover:bg-white/10"
@@ -50,9 +52,10 @@ export default function Home() {
                 target="_blank"
                 rel="noreferrer"
               >
-                View on GitHub
+                View source on GitHub
               </a>
             </div>
+            <p className="mt-3 text-sm text-zinc-400">Start in Discover to choose a track.</p>
           </section>
 
           <section id="features" className="relative z-10 mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
