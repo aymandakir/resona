@@ -1,0 +1,1523 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Glowee — Il tuo parrucchiere a domicilio</title>
+  <meta name="description" content="Glowee porta i migliori parrucchieri certificati direttamente a casa degli anziani a Pescara. Prenota in pochi minuti su WhatsApp." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --rose:    #E8A598;
+      --rose-d:  #C8796A;
+      --rose-l:  #F5DDD9;
+      --cream:   #FDF7F2;
+      --sand:    #F0E6DC;
+      --brown:   #4A2F27;
+      --brown-m: #7A4A3D;
+      --green:   #5A7A5A;
+      --green-l: #D6E8D6;
+      --text:    #2D1F1A;
+      --muted:   #8C6B60;
+      --white:   #FFFFFF;
+      --r: 1.5rem;
+      --r-lg: 2rem;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Fraunces', serif;
+      line-height: 1.2;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(253, 247, 242, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(200, 121, 106, 0.15);
+      padding: 1rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: 'Fraunces', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--rose-d);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--brown); }
+
+    .nav-links {
+      display: flex; gap: 2rem; list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--brown-m);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--rose-d); }
+
+    .btn-nav {
+      background: var(--rose-d);
+      color: var(--white) !important;
+      padding: .55rem 1.3rem;
+      border-radius: 100px;
+      transition: background .2s, transform .15s !important;
+    }
+    .btn-nav:hover { background: var(--brown) !important; transform: translateY(-1px); }
+
+    .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
+    .hamburger span { width: 24px; height: 2px; background: var(--brown-m); border-radius: 2px; transition: .3s; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100svh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 6rem 6vw 4rem;
+      gap: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 80% 40%, rgba(232, 165, 152, 0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: var(--rose-l);
+      color: var(--rose-d);
+      font-size: .8rem;
+      font-weight: 600;
+      padding: .4rem 1rem;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .hero-badge .dot {
+      width: 7px; height: 7px;
+      background: var(--rose-d);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .5; transform: scale(.8); }
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 700;
+      color: var(--brown);
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--rose-d);
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+      max-width: 480px;
+      line-height: 1.7;
+    }
+
+    .hero-cta {
+      display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;
+    }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: .6rem;
+      background: var(--rose-d);
+      color: var(--white);
+      padding: .9rem 2rem;
+      border-radius: 100px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background .2s, transform .15s, box-shadow .2s;
+      box-shadow: 0 4px 20px rgba(200, 121, 106, .35);
+    }
+    .btn-primary:hover { background: var(--brown); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(74, 47, 39, .28); }
+
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: .6rem;
+      color: var(--brown-m);
+      font-size: .95rem;
+      font-weight: 500;
+      text-decoration: none;
+      padding: .9rem 1.5rem;
+      border-radius: 100px;
+      border: 1.5px solid rgba(122, 74, 61, .25);
+      transition: border-color .2s, color .2s;
+    }
+    .btn-secondary:hover { border-color: var(--rose-d); color: var(--rose-d); }
+
+    .hero-trust {
+      display: flex; align-items: center; gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .trust-avatars {
+      display: flex;
+    }
+
+    .trust-avatars .av {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 2.5px solid var(--white);
+      margin-left: -10px;
+      background: var(--sand);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .85rem;
+      overflow: hidden;
+    }
+    .trust-avatars .av:first-child { margin-left: 0; }
+
+    .trust-text { font-size: .85rem; color: var(--muted); }
+    .trust-text strong { color: var(--brown); }
+
+    /* Hero visual */
+    .hero-visual {
+      position: relative;
+      display: flex; justify-content: center; align-items: center;
+    }
+
+    .hero-card-main {
+      background: var(--white);
+      border-radius: var(--r-lg);
+      padding: 2.5rem;
+      box-shadow: 0 20px 60px rgba(74, 47, 39, .12);
+      max-width: 360px;
+      width: 100%;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-card-main .tag {
+      background: var(--green-l);
+      color: var(--green);
+      font-size: .75rem;
+      font-weight: 600;
+      padding: .3rem .8rem;
+      border-radius: 100px;
+      display: inline-block;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-card-main h3 {
+      font-size: 1.3rem;
+      margin-bottom: .5rem;
+      color: var(--brown);
+    }
+
+    .hero-card-main p {
+      font-size: .9rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .booking-row {
+      display: flex; flex-direction: column; gap: .75rem;
+    }
+
+    .booking-item {
+      display: flex; align-items: center; gap: .75rem;
+      background: var(--cream);
+      border-radius: .75rem;
+      padding: .75rem 1rem;
+    }
+
+    .booking-icon {
+      width: 36px; height: 36px;
+      border-radius: .5rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .booking-item .bi-rose { background: var(--rose-l); }
+    .booking-item .bi-green { background: var(--green-l); }
+    .booking-item .bi-sand { background: var(--sand); }
+
+    .booking-item .info { flex: 1; }
+    .booking-item .info .label { font-size: .75rem; color: var(--muted); }
+    .booking-item .info .val { font-size: .9rem; font-weight: 600; color: var(--brown); }
+
+    .booking-item .status {
+      font-size: .7rem;
+      font-weight: 600;
+      padding: .25rem .65rem;
+      border-radius: 100px;
+    }
+    .status-confirmed { background: var(--green-l); color: var(--green); }
+    .status-pending { background: var(--rose-l); color: var(--rose-d); }
+
+    .floating-card {
+      position: absolute;
+      background: var(--white);
+      border-radius: 1rem;
+      padding: 1rem 1.25rem;
+      box-shadow: 0 8px 30px rgba(74, 47, 39, .12);
+      z-index: 3;
+    }
+
+    .fc-stars { top: -1.5rem; right: -2rem; display: flex; flex-direction: column; gap: .2rem; }
+    .stars { color: #F5A623; font-size: 1rem; letter-spacing: 1px; }
+    .fc-stars p { font-size: .78rem; color: var(--brown); font-weight: 600; }
+
+    .fc-nps { bottom: 2rem; left: -3rem; }
+    .fc-nps .nps-val { font-size: 1.6rem; font-weight: 700; color: var(--green); font-family: 'Fraunces', serif; }
+    .fc-nps .nps-label { font-size: .72rem; color: var(--muted); }
+
+    .bg-blob {
+      position: absolute;
+      border-radius: 50%;
+      opacity: .6;
+      filter: blur(40px);
+      pointer-events: none;
+    }
+    .blob-1 { width: 300px; height: 300px; background: var(--rose-l); top: -60px; right: -80px; z-index: 0; }
+    .blob-2 { width: 200px; height: 200px; background: var(--green-l); bottom: -40px; left: -60px; z-index: 0; }
+
+    /* ── SECTION GENERIC ── */
+    section { padding: 5rem 6vw; }
+
+    .section-label {
+      font-size: .8rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--rose-d);
+      margin-bottom: .75rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      color: var(--brown);
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .section-sub {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.7;
+    }
+
+    .section-header { margin-bottom: 3.5rem; }
+
+    /* ── LOGOS / TRUST STRIP ── */
+    .trust-strip {
+      padding: 2rem 6vw;
+      background: var(--sand);
+      border-top: 1px solid rgba(200, 121, 106, .1);
+      border-bottom: 1px solid rgba(200, 121, 106, .1);
+    }
+
+    .trust-strip-inner {
+      display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .trust-strip p {
+      font-size: .8rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .trust-items {
+      display: flex; gap: 2.5rem; flex-wrap: wrap; align-items: center;
+    }
+
+    .trust-item {
+      display: flex; align-items: center; gap: .5rem;
+      font-size: .85rem;
+      color: var(--brown-m);
+      font-weight: 500;
+    }
+    .trust-item span { font-size: 1.1rem; }
+
+    /* ── HOW IT WORKS ── */
+    .how { background: var(--white); }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .step {
+      background: var(--cream);
+      border-radius: var(--r);
+      padding: 2rem;
+      position: relative;
+      transition: transform .25s, box-shadow .25s;
+    }
+    .step:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(74, 47, 39, .1); }
+
+    .step-num {
+      width: 48px; height: 48px;
+      background: var(--rose-d);
+      color: var(--white);
+      border-radius: .75rem;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Fraunces', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+
+    .step h3 { font-size: 1.2rem; color: var(--brown); margin-bottom: .75rem; }
+    .step p { font-size: .9rem; color: var(--muted); line-height: 1.65; }
+
+    .step-connector {
+      position: absolute;
+      right: -1.25rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--rose-l);
+      font-size: 1.5rem;
+      z-index: 2;
+    }
+
+    /* ── WHY GLOWEE ── */
+    .why {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .why-features {
+      display: flex; flex-direction: column; gap: 1.5rem;
+    }
+
+    .feature {
+      display: flex; gap: 1.25rem;
+      align-items: flex-start;
+    }
+
+    .feature-icon {
+      width: 48px; height: 48px;
+      border-radius: .75rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+      margin-top: .1rem;
+    }
+
+    .fi-rose { background: var(--rose-l); }
+    .fi-green { background: var(--green-l); }
+    .fi-sand { background: var(--sand); }
+    .fi-blue { background: #D6E8F5; }
+
+    .feature h4 { font-size: 1.05rem; color: var(--brown); margin-bottom: .35rem; }
+    .feature p { font-size: .9rem; color: var(--muted); line-height: 1.65; }
+
+    .why-visual {
+      position: relative;
+      display: flex; justify-content: center;
+    }
+
+    .why-card {
+      background: var(--white);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(74, 47, 39, .12);
+      max-width: 340px;
+      width: 100%;
+    }
+
+    .why-card-img {
+      height: 220px;
+      background: linear-gradient(135deg, var(--rose-l) 0%, var(--sand) 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .why-card-img::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 60px;
+      background: linear-gradient(transparent, var(--white));
+    }
+
+    .why-card-body { padding: 1.5rem; }
+
+    .prof-row {
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem;
+    }
+
+    .prof-av {
+      width: 50px; height: 50px;
+      border-radius: 50%;
+      background: var(--rose-l);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .prof-name { font-weight: 600; color: var(--brown); font-size: .95rem; }
+    .prof-sub { font-size: .78rem; color: var(--muted); }
+
+    .prof-badge {
+      margin-left: auto;
+      background: var(--green-l);
+      color: var(--green);
+      font-size: .7rem;
+      font-weight: 600;
+      padding: .3rem .7rem;
+      border-radius: 100px;
+    }
+
+    .why-stats {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+    }
+
+    .why-stat {
+      background: var(--cream);
+      border-radius: .75rem;
+      padding: .85rem 1rem;
+    }
+    .why-stat .val { font-size: 1.3rem; font-weight: 700; color: var(--brown); font-family: 'Fraunces', serif; }
+    .why-stat .label { font-size: .72rem; color: var(--muted); }
+
+    .why-fc {
+      position: absolute;
+      background: var(--white);
+      border-radius: 1rem;
+      padding: .9rem 1.1rem;
+      box-shadow: 0 8px 30px rgba(74, 47, 39, .14);
+    }
+    .why-fc-check { bottom: 2rem; right: -2.5rem; display: flex; align-items: center; gap: .5rem; }
+    .check-icon { width: 30px; height: 30px; background: var(--green-l); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--green); font-size: 1rem; }
+    .why-fc-check p { font-size: .78rem; font-weight: 600; color: var(--brown); white-space: nowrap; }
+
+    /* ── PRICING ── */
+    .pricing { background: var(--sand); }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .pricing-card {
+      background: var(--white);
+      border-radius: var(--r);
+      padding: 2rem;
+      position: relative;
+      border: 2px solid transparent;
+      transition: border-color .25s, transform .25s, box-shadow .25s;
+    }
+    .pricing-card:hover { transform: translateY(-4px); box-shadow: 0 16px 50px rgba(74, 47, 39, .12); }
+    .pricing-card.featured { border-color: var(--rose-d); }
+
+    .featured-badge {
+      position: absolute;
+      top: -12px; left: 50%; transform: translateX(-50%);
+      background: var(--rose-d);
+      color: var(--white);
+      font-size: .72rem;
+      font-weight: 700;
+      padding: .3rem 1rem;
+      border-radius: 100px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .pricing-title { font-size: .85rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: .75rem; }
+    .pricing-price { font-size: 2.8rem; font-weight: 700; color: var(--brown); font-family: 'Fraunces', serif; line-height: 1; margin-bottom: .25rem; }
+    .pricing-price sup { font-size: 1.4rem; vertical-align: super; }
+    .pricing-price sub { font-size: .9rem; color: var(--muted); font-family: 'Inter', sans-serif; font-weight: 400; }
+    .pricing-desc { font-size: .85rem; color: var(--muted); margin-bottom: 1.75rem; }
+
+    .pricing-features {
+      list-style: none;
+      display: flex; flex-direction: column; gap: .6rem;
+      margin-bottom: 2rem;
+    }
+    .pricing-features li {
+      display: flex; align-items: center; gap: .6rem;
+      font-size: .88rem; color: var(--brown-m);
+    }
+    .pricing-features li .check { color: var(--green); font-size: 1rem; }
+
+    .btn-pricing {
+      display: block; text-align: center;
+      padding: .8rem;
+      border-radius: 100px;
+      font-weight: 600;
+      font-size: .9rem;
+      text-decoration: none;
+      transition: .2s;
+    }
+    .btn-pricing-primary { background: var(--rose-d); color: var(--white); }
+    .btn-pricing-primary:hover { background: var(--brown); }
+    .btn-pricing-outline { border: 1.5px solid rgba(122, 74, 61, .3); color: var(--brown-m); }
+    .btn-pricing-outline:hover { border-color: var(--rose-d); color: var(--rose-d); }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials { background: var(--white); }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .review-card {
+      background: var(--cream);
+      border-radius: var(--r);
+      padding: 1.75rem;
+      transition: transform .25s;
+    }
+    .review-card:hover { transform: translateY(-3px); }
+
+    .review-stars { color: #F5A623; font-size: 1rem; margin-bottom: 1rem; }
+
+    .review-text {
+      font-size: .92rem;
+      color: var(--brown-m);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .reviewer {
+      display: flex; align-items: center; gap: .85rem;
+    }
+    .reviewer-av {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--rose-l);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+    .reviewer-name { font-size: .88rem; font-weight: 600; color: var(--brown); }
+    .reviewer-role { font-size: .76rem; color: var(--muted); }
+
+    /* ── CAREGIVERS SECTION ── */
+    .caregivers {
+      background: var(--brown);
+      color: var(--white);
+    }
+
+    .cg-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .caregivers .section-label { color: var(--rose); }
+    .caregivers .section-title { color: var(--white); }
+    .caregivers .section-sub { color: rgba(255, 255, 255, .7); max-width: 460px; }
+
+    .cg-steps {
+      display: flex; flex-direction: column; gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .cg-step {
+      display: flex; gap: 1.25rem; align-items: flex-start;
+    }
+
+    .cg-step-num {
+      width: 36px; height: 36px;
+      background: rgba(255, 255, 255, .12);
+      border: 1.5px solid rgba(255, 255, 255, .25);
+      border-radius: .5rem;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Fraunces', serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--rose);
+      flex-shrink: 0;
+    }
+
+    .cg-step h4 { font-size: 1rem; color: var(--white); margin-bottom: .3rem; }
+    .cg-step p { font-size: .85rem; color: rgba(255, 255, 255, .65); line-height: 1.6; }
+
+    .cg-visual {
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: var(--r-lg);
+      padding: 2.5rem;
+    }
+
+    .whatsapp-mock {
+      background: #ECE5DD;
+      border-radius: 1rem;
+      overflow: hidden;
+    }
+
+    .wa-header {
+      background: #075E54;
+      padding: .85rem 1.25rem;
+      display: flex; align-items: center; gap: .85rem;
+    }
+
+    .wa-av {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--rose-l);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .wa-name { color: white; font-weight: 600; font-size: .9rem; }
+    .wa-status { color: rgba(255,255,255,.7); font-size: .75rem; }
+    .wa-dots { margin-left: auto; color: rgba(255,255,255,.7); font-size: 1.2rem; letter-spacing: 2px; }
+
+    .wa-body {
+      padding: 1rem;
+      display: flex; flex-direction: column; gap: .65rem;
+      min-height: 260px;
+    }
+
+    .wa-msg {
+      max-width: 75%;
+      padding: .65rem .9rem;
+      border-radius: .85rem;
+      font-size: .82rem;
+      line-height: 1.5;
+      position: relative;
+    }
+
+    .wa-msg.recv {
+      background: var(--white);
+      border-radius: 0 .85rem .85rem .85rem;
+      align-self: flex-start;
+      color: #111;
+    }
+
+    .wa-msg.sent {
+      background: #DCF8C6;
+      border-radius: .85rem 0 .85rem .85rem;
+      align-self: flex-end;
+      color: #111;
+    }
+
+    .wa-time { font-size: .65rem; color: #999; margin-top: .2rem; text-align: right; }
+
+    .wa-footer {
+      background: #F0F0F0;
+      padding: .75rem 1rem;
+      display: flex; align-items: center; gap: .75rem;
+    }
+    .wa-input {
+      flex: 1;
+      background: var(--white);
+      border-radius: 100px;
+      padding: .5rem 1rem;
+      font-size: .82rem;
+      color: #999;
+    }
+    .wa-send {
+      width: 36px; height: 36px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: white;
+      font-size: 1rem;
+    }
+
+    /* ── STATS ── */
+    .stats {
+      background: var(--rose-d);
+      color: var(--white);
+      padding: 4rem 6vw;
+    }
+
+    .stats-inner {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: 'Fraunces', serif;
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: .4rem;
+    }
+    .stat-label { font-size: .9rem; opacity: .85; }
+
+    /* ── PROVIDERS ── */
+    .providers { background: var(--cream); }
+
+    .prov-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .prov-cards {
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+
+    .prov-card {
+      background: var(--white);
+      border-radius: var(--r);
+      padding: 1.5rem;
+      display: flex; align-items: center; gap: 1.25rem;
+      box-shadow: 0 4px 20px rgba(74, 47, 39, .07);
+      transition: transform .2s;
+    }
+    .prov-card:hover { transform: translateX(6px); }
+
+    .prov-card-icon {
+      width: 52px; height: 52px;
+      border-radius: .75rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .prov-card h4 { font-size: 1rem; color: var(--brown); margin-bottom: .25rem; }
+    .prov-card p { font-size: .83rem; color: var(--muted); }
+
+    .prov-join {
+      background: var(--white);
+      border-radius: var(--r-lg);
+      padding: 2.5rem;
+      box-shadow: 0 10px 40px rgba(74, 47, 39, .1);
+    }
+
+    .prov-join h3 { font-size: 1.5rem; color: var(--brown); margin-bottom: .75rem; }
+    .prov-join p { font-size: .9rem; color: var(--muted); margin-bottom: 1.75rem; }
+
+    .prov-form {
+      display: flex; flex-direction: column; gap: .85rem;
+    }
+
+    .form-input {
+      background: var(--cream);
+      border: 1.5px solid rgba(122, 74, 61, .15);
+      border-radius: .75rem;
+      padding: .8rem 1rem;
+      font-size: .9rem;
+      font-family: 'Inter', sans-serif;
+      color: var(--brown);
+      outline: none;
+      transition: border-color .2s;
+      width: 100%;
+    }
+    .form-input:focus { border-color: var(--rose-d); }
+    .form-input::placeholder { color: var(--muted); }
+
+    /* ── CTA ── */
+    .cta-section {
+      background: linear-gradient(135deg, var(--rose-l) 0%, var(--sand) 50%, var(--green-l) 100%);
+      text-align: center;
+      padding: 6rem 6vw;
+    }
+
+    .cta-section .section-title { max-width: 640px; margin: 0 auto 1rem; }
+    .cta-section .section-sub { margin: 0 auto 2.5rem; text-align: center; }
+
+    .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    .btn-whatsapp {
+      display: inline-flex; align-items: center; gap: .7rem;
+      background: #25D366;
+      color: var(--white);
+      padding: .9rem 2rem;
+      border-radius: 100px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background .2s, transform .15s;
+      box-shadow: 0 4px 20px rgba(37, 211, 102, .35);
+    }
+    .btn-whatsapp:hover { background: #1DA851; transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--brown);
+      color: rgba(255, 255, 255, .75);
+      padding: 4rem 6vw 2rem;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-brand .logo {
+      font-family: 'Fraunces', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: .75rem;
+    }
+
+    .footer-brand p {
+      font-size: .87rem;
+      line-height: 1.65;
+      max-width: 260px;
+    }
+
+    .footer-col h5 {
+      font-family: 'Fraunces', serif;
+      color: var(--white);
+      margin-bottom: 1rem;
+      font-size: .95rem;
+    }
+
+    .footer-col a {
+      display: block;
+      color: rgba(255, 255, 255, .6);
+      text-decoration: none;
+      font-size: .85rem;
+      margin-bottom: .5rem;
+      transition: color .2s;
+    }
+    .footer-col a:hover { color: var(--rose); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, .1);
+      padding-top: 1.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: .8rem;
+    }
+
+    .footer-socials { display: flex; gap: 1rem; }
+    .social-link {
+      width: 36px; height: 36px;
+      border-radius: .5rem;
+      background: rgba(255, 255, 255, .08);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255, 255, 255, .6);
+      text-decoration: none;
+      font-size: 1rem;
+      transition: background .2s, color .2s;
+    }
+    .social-link:hover { background: var(--rose-d); color: var(--white); }
+
+    /* ── MOBILE ── */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .nav-links.open { display: flex; flex-direction: column; position: fixed; top: 64px; left: 0; right: 0; background: var(--cream); padding: 1.5rem 2rem; border-bottom: 1px solid rgba(200, 121, 106, .2); gap: 1rem; z-index: 99; }
+      .hamburger { display: flex; }
+
+      .hero { grid-template-columns: 1fr; padding: 7rem 5vw 4rem; text-align: center; }
+      .hero-cta { justify-content: center; }
+      .hero-trust { justify-content: center; }
+      .hero p { margin: 0 auto 2.5rem; }
+      .hero-visual { display: none; }
+
+      .steps { grid-template-columns: 1fr; }
+      .step-connector { display: none; }
+
+      .why { grid-template-columns: 1fr; gap: 3rem; }
+      .why-visual { display: none; }
+
+      .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+
+      .reviews-grid { grid-template-columns: 1fr; }
+
+      .cg-inner { grid-template-columns: 1fr; gap: 3rem; }
+
+      .stats-inner { grid-template-columns: 1fr 1fr; }
+
+      .prov-inner { grid-template-columns: 1fr; gap: 3rem; }
+
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+
+    @media (max-width: 480px) {
+      section { padding: 4rem 5vw; }
+      .footer-top { grid-template-columns: 1fr; }
+      .stats-inner { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Glow<span>ee</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#come-funziona">Come funziona</a></li>
+      <li><a href="#perche-glowee">Perché Glowee</a></li>
+      <li><a href="#prezzi">Prezzi</a></li>
+      <li><a href="#recensioni">Recensioni</a></li>
+      <li><a href="#professioniste">Sei una parrucchiera?</a></li>
+      <li><a href="https://wa.me/393000000000?text=Ciao%20Glowee!%20Vorrei%20prenotare%20un%20taglio%20a%20domicilio." class="btn-nav" target="_blank">Prenota ora</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <div class="dot"></div>
+        Disponibile a Pescara
+      </div>
+      <h1>Il tuo parrucchiere<br/><em>a casa</em>, in 24 ore</h1>
+      <p>Glowee porta parrucchieri certificati direttamente a casa degli anziani. Prenota in pochi minuti su WhatsApp — senza app, senza complicazioni, con garanzia di rimborso.</p>
+      <div class="hero-cta">
+        <a href="https://wa.me/393000000000?text=Ciao%20Glowee!%20Vorrei%20prenotare%20un%20taglio%20a%20domicilio." class="btn-primary" target="_blank">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Prenota su WhatsApp
+        </a>
+        <a href="#come-funziona" class="btn-secondary">
+          Scopri come funziona →
+        </a>
+      </div>
+      <div class="hero-trust">
+        <div class="trust-avatars">
+          <div class="av">👵</div>
+          <div class="av">👩</div>
+          <div class="av">👴</div>
+          <div class="av">👩‍🦳</div>
+        </div>
+        <p class="trust-text"><strong>200+ famiglie</strong> si fidano già di Glowee</p>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="bg-blob blob-1"></div>
+      <div class="bg-blob blob-2"></div>
+      <div class="hero-card-main">
+        <div class="tag">✓ Confermato</div>
+        <h3>La tua prossima visita</h3>
+        <p>Parrucchiera certificata in arrivo</p>
+        <div class="booking-row">
+          <div class="booking-item">
+            <div class="booking-icon bi-rose">💇‍♀️</div>
+            <div class="info">
+              <div class="label">Servizio</div>
+              <div class="val">Taglio & messa in piega</div>
+            </div>
+          </div>
+          <div class="booking-item">
+            <div class="booking-icon bi-green">📅</div>
+            <div class="info">
+              <div class="label">Data & ora</div>
+              <div class="val">Dom 11 Maggio, 10:00</div>
+            </div>
+            <div class="status status-confirmed">Conf.</div>
+          </div>
+          <div class="booking-item">
+            <div class="booking-icon bi-sand">📍</div>
+            <div class="info">
+              <div class="label">Indirizzo</div>
+              <div class="val">Via Nazionale, Pescara</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="floating-card fc-stars">
+        <div class="stars">★★★★★</div>
+        <p>NPS Score: 62</p>
+      </div>
+      <div class="floating-card fc-nps">
+        <div class="nps-val">98%</div>
+        <div class="nps-label">clienti soddisfatti</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST STRIP -->
+  <div class="trust-strip">
+    <div class="trust-strip-inner">
+      <p>Scelto con fiducia da</p>
+      <div class="trust-items">
+        <div class="trust-item"><span>🏥</span> Medici di base</div>
+        <div class="trust-item"><span>💊</span> Farmacie locali</div>
+        <div class="trust-item"><span>⛪</span> Parrocchie</div>
+        <div class="trust-item"><span>🏠</span> Centri anziani</div>
+        <div class="trust-item"><span>❤️</span> Famiglie Pescaresi</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <section class="how" id="come-funziona">
+    <div class="section-header fade-up">
+      <div class="section-label">Come funziona</div>
+      <h2 class="section-title">Tre semplici passi, <em style="color:var(--rose-d);font-style:italic">zero complicazioni</em></h2>
+      <p class="section-sub">Niente app da installare, niente registrazioni complesse. Basta WhatsApp — quello che già usi ogni giorno.</p>
+    </div>
+    <div class="steps">
+      <div class="step fade-up" style="transition-delay:.1s">
+        <div class="step-num">1</div>
+        <h3>Scrivi su WhatsApp</h3>
+        <p>Mandaci un messaggio con il nome dell'anziano, l'indirizzo e il giorno preferito. Rispondiamo entro 5 minuti, sempre.</p>
+        <div class="step-connector">→</div>
+      </div>
+      <div class="step fade-up" style="transition-delay:.2s">
+        <div class="step-num">2</div>
+        <h3>Scegliamo la professionista</h3>
+        <p>Ti abbiniamo a una parrucchiera certificata, con background check, che vive vicino a voi. Conferma immediata via messaggio.</p>
+        <div class="step-connector">→</div>
+      </div>
+      <div class="step fade-up" style="transition-delay:.3s">
+        <div class="step-num">3</div>
+        <h3>Arriva a casa tua</h3>
+        <p>La parrucchiera arriva puntuale con tutto l'occorrente. Paghi al termine con contanti o carta. Soddisfatto o rimborsato.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY GLOWEE -->
+  <section id="perche-glowee">
+    <div class="why">
+      <div>
+        <div class="section-header">
+          <div class="section-label">Perché Glowee</div>
+          <h2 class="section-title">Professionalità e <em style="color:var(--rose-d);font-style:italic">sicurezza</em> prima di tutto</h2>
+          <p class="section-sub">Sappiamo quanto è importante aprire la porta di casa con fiducia. Per questo ogni parrucchiera Glowee è selezionata, verificata e assicurata.</p>
+        </div>
+        <div class="why-features fade-up">
+          <div class="feature">
+            <div class="feature-icon fi-rose">🔍</div>
+            <div>
+              <h4>Background check garantito</h4>
+              <p>Ogni professionista è verificata con controllo documenti e referenze. Non apri la porta a sconosciuti, ma a persone di fiducia.</p>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="feature-icon fi-green">✅</div>
+            <div>
+              <h4>Certifcate e assicurate</h4>
+              <p>Tutte le parrucchiere hanno diploma professionale e copertura assicurativa. Nessuna improvvisazione.</p>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="feature-icon fi-sand">🔄</div>
+            <div>
+              <h4>Sempre la stessa parrucchiera</h4>
+              <p>Il rapporto personale è tutto. Ti assegniamo la stessa professionista ad ogni visita, così nasce la fiducia vera.</p>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="feature-icon fi-blue">💯</div>
+            <div>
+              <h4>Garanzia rimborso totale</h4>
+              <p>Non sei soddisfatta? Ti rimborsiamo al 100%, senza domande. La tua tranquillità vale più di tutto.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="why-visual fade-up">
+        <div class="why-card">
+          <div class="why-card-img">✂️</div>
+          <div class="why-card-body">
+            <div class="prof-row">
+              <div class="prof-av">👩‍🦰</div>
+              <div>
+                <div class="prof-name">Chiara Marchetti</div>
+                <div class="prof-sub">Parrucchiera · 8 anni esp.</div>
+              </div>
+              <div class="prof-badge">✓ Verificata</div>
+            </div>
+            <div class="why-stats">
+              <div class="why-stat">
+                <div class="val">148</div>
+                <div class="label">Visite completate</div>
+              </div>
+              <div class="why-stat">
+                <div class="val">★ 4.9</div>
+                <div class="label">Valutazione media</div>
+              </div>
+              <div class="why-stat">
+                <div class="val">97%</div>
+                <div class="label">Tasso di riprenotazione</div>
+              </div>
+              <div class="why-stat">
+                <div class="val">3 anni</div>
+                <div class="label">Con Glowee</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="why-fc why-fc-check">
+          <div class="check-icon">✓</div>
+          <p>Background check superato</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stats-inner">
+      <div class="fade-up">
+        <div class="stat-num">98%</div>
+        <div class="stat-label">clienti soddisfatti</div>
+      </div>
+      <div class="fade-up" style="transition-delay:.1s">
+        <div class="stat-num">24h</div>
+        <div class="stat-label">tempo medio di prenotazione</div>
+      </div>
+      <div class="fade-up" style="transition-delay:.2s">
+        <div class="stat-num">62</div>
+        <div class="stat-label">NPS score</div>
+      </div>
+      <div class="fade-up" style="transition-delay:.3s">
+        <div class="stat-num">200+</div>
+        <div class="stat-label">famiglie servite a Pescara</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRICING -->
+  <section class="pricing" id="prezzi">
+    <div class="section-header fade-up" style="text-align:center;">
+      <div class="section-label">Prezzi trasparenti</div>
+      <h2 class="section-title">Nessuna sorpresa, <em style="color:var(--rose-d);font-style:italic">solo cura</em></h2>
+      <p class="section-sub" style="margin:0 auto;text-align:center;">Prezzi chiari, tutto incluso. La prima visita a soli €5 per scoprire il servizio senza rischi.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card fade-up" style="transition-delay:.1s">
+        <div class="pricing-title">Prima visita</div>
+        <div class="pricing-price"><sup>€</sup>5</div>
+        <div class="pricing-desc">Prova senza rischi — soddisfatta o rimborsata</div>
+        <ul class="pricing-features">
+          <li><span class="check">✓</span> Taglio capelli base</li>
+          <li><span class="check">✓</span> Professionista certificata</li>
+          <li><span class="check">✓</span> A domicilio</li>
+          <li><span class="check">✓</span> Garanzia rimborso</li>
+        </ul>
+        <a href="https://wa.me/393000000000?text=Ciao%20Glowee!%20Vorrei%20prenotare%20la%20prima%20visita%20a%205%20euro." class="btn-pricing btn-pricing-outline" target="_blank">Prenota ora →</a>
+      </div>
+      <div class="pricing-card featured fade-up" style="transition-delay:.2s">
+        <div class="featured-badge">⭐ Più scelto</div>
+        <div class="pricing-title">Singola visita</div>
+        <div class="pricing-price"><sup>€</sup>30</div>
+        <div class="pricing-desc">Una visita completa, quando ne hai bisogno</div>
+        <ul class="pricing-features">
+          <li><span class="check">✓</span> Taglio + messa in piega</li>
+          <li><span class="check">✓</span> Shampoo incluso</li>
+          <li><span class="check">✓</span> Stessa parrucchiera</li>
+          <li><span class="check">✓</span> Prenotazione WhatsApp 24/7</li>
+          <li><span class="check">✓</span> Garanzia rimborso</li>
+        </ul>
+        <a href="https://wa.me/393000000000?text=Ciao%20Glowee!%20Vorrei%20prenotare%20una%20visita." class="btn-pricing btn-pricing-primary" target="_blank">Prenota ora →</a>
+      </div>
+      <div class="pricing-card fade-up" style="transition-delay:.3s">
+        <div class="pricing-title">Abbonamento mensile</div>
+        <div class="pricing-price"><sup>€</sup>89<sub>/mese</sub></div>
+        <div class="pricing-desc">4 visite mensili — risparmia 31€</div>
+        <ul class="pricing-features">
+          <li><span class="check">✓</span> 4 tagli al mese</li>
+          <li><span class="check">✓</span> Priorità nella prenotazione</li>
+          <li><span class="check">✓</span> Stessa parrucchiera sempre</li>
+          <li><span class="check">✓</span> Reminder automatici</li>
+          <li><span class="check">✓</span> Manicure base inclusa</li>
+        </ul>
+        <a href="https://wa.me/393000000000?text=Ciao%20Glowee!%20Sono%20interessata%20all'abbonamento%20mensile." class="btn-pricing btn-pricing-outline" target="_blank">Scopri l'abbonamento →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" id="recensioni">
+    <div class="section-header fade-up" style="text-align:center;">
+      <div class="section-label">Recensioni</div>
+      <h2 class="section-title">Le famiglie di Pescara <em style="color:var(--rose-d);font-style:italic">ci amano</em></h2>
+      <p class="section-sub" style="margin:0 auto;text-align:center;">Leggi le esperienze reali di chi ha già scelto Glowee per i propri cari.</p>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card fade-up" style="transition-delay:.1s">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Mia madre ha 84 anni e non riesce più ad uscire. Da quando ho scoperto Glowee, è tornata a sorridere. Chiara viene ogni mese ed è diventata quasi di famiglia. Servizio impeccabile."</p>
+        <div class="reviewer">
+          <div class="reviewer-av">👩</div>
+          <div>
+            <div class="reviewer-name">Francesca D.</div>
+            <div class="reviewer-role">Figlia caregiver · Pescara</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card fade-up" style="transition-delay:.2s">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Ho prenotato su WhatsApp in 3 minuti. La parrucchiera era puntuale, professionale e gentilissima con mio padre. Prezzo onesto, nessuna sorpresa. Torneremo senza dubbio."</p>
+        <div class="reviewer">
+          <div class="reviewer-av">👨</div>
+          <div>
+            <div class="reviewer-name">Marco T.</div>
+            <div class="reviewer-role">Figlio · Montesilvano</div>
+          </div>
+        </div>
+      </div>
+      <div class="review-card fade-up" style="transition-delay:.3s">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Finalmente un servizio pensato davvero per gli anziani. Mia nonna di 91 anni si sente di nuovo curata e dignitosa. Il background check mi ha tranquillizzato subito. Consigliatissimo."</p>
+        <div class="reviewer">
+          <div class="reviewer-av">👩‍💼</div>
+          <div>
+            <div class="reviewer-name">Laura M.</div>
+            <div class="reviewer-role">Nipote · Pescara</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAREGIVERS -->
+  <section class="caregivers">
+    <div class="cg-inner">
+      <div>
+        <div class="section-label">Per le famiglie</div>
+        <h2 class="section-title">Hai poco tempo<br/>ma vuoi il meglio<br/>per <em style="color:var(--rose);font-style:italic">mamma o papà?</em></h2>
+        <p class="section-sub">Sappiamo quanto è difficile conciliare lavoro, figli e cura del genitore anziano. Glowee si prende cura di quella parte — con professionalità, puntualità e tenerezza.</p>
+        <div class="cg-steps">
+          <div class="cg-step">
+            <div class="cg-step-num">1</div>
+            <div>
+              <h4>Scrivi ora su WhatsApp</h4>
+              <p>Nome del tuo caro, indirizzo, giorno preferito. Bastano 3 righe.</p>
+            </div>
+          </div>
+          <div class="cg-step">
+            <div class="cg-step-num">2</div>
+            <div>
+              <h4>Ricevi conferma in meno di un'ora</h4>
+              <p>Ti diciamo chi viene, quando e con che servizi. Tutto chiaro prima della visita.</p>
+            </div>
+          </div>
+          <div class="cg-step">
+            <div class="cg-step-num">3</div>
+            <div>
+              <h4>Porta un amico, guadagna uno sconto</h4>
+              <p>Ogni caregiver che porti riceve il 50% sulla prima prenotazione. E tu risparmi sulla prossima.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cg-visual">
+        <div class="whatsapp-mock">
+          <div class="wa-header">
+            <div class="wa-av">✂️</div>
+            <div>
+              <div class="wa-name">Glowee</div>
+              <div class="wa-status">in linea</div>
+            </div>
+            <div class="wa-dots">⋮</div>
+          </div>
+          <div class="wa-body">
+            <div class="wa-msg recv">
+              Ciao! 👋 Benvenuta su Glowee.<br/>Come possiamo aiutarti oggi?
+              <div class="wa-time">10:02</div>
+            </div>
+            <div class="wa-msg sent">
+              Ciao! Cerco una parrucchiera per mia mamma di 78 anni a Pescara
+              <div class="wa-time">10:03</div>
+            </div>
+            <div class="wa-msg recv">
+              Perfetto! 💇‍♀️ Abbiamo parrucchiere disponibili vicino a voi.<br/>Che indirizzo e che giorno preferisce?
+              <div class="wa-time">10:03</div>
+            </div>
+            <div class="wa-msg sent">
+              Via Nazionale 42, sabato mattina va bene 😊
+              <div class="wa-time">10:04</div>
+            </div>
+            <div class="wa-msg recv">
+              ✅ <strong>Confermato!</strong> Chiara sarà da voi <br/>sabato 10 maggio alle 10:00.<br/>Prima visita: solo €5 🌸
+              <div class="wa-time">10:05</div>
+            </div>
+          </div>
+          <div class="wa-footer">
+            <div class="wa-input">Scrivi un messaggio...</div>
+            <div class="wa-send">➤</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROVIDERS -->
+  <section class="providers" id="professioniste">
+    <div class="prov-inner">
+      <div>
+        <div class="section-header">
+          <div class="section-label">Sei una parrucchiera?</div>
+          <h2 class="section-title">Guadagna di più,<br/>con la <em style="color:var(--rose-d);font-style:italic">flessibilità</em><br/>che meriti</h2>
+          <p class="section-sub">Lavori in salon ma vorresti più libertà? Glowee ti porta clienti a domicilio senza rischi. Noi gestiamo il marketing, tu fai quello che sai fare meglio.</p>
+        </div>
+        <div class="prov-cards">
+          <div class="prov-card fade-up">
+            <div class="prov-card-icon fi-rose">💰</div>
+            <div>
+              <h4>Guadagno integrativo reale</h4>
+              <p>Media €25–35 a visita, orari flessibili, zero rischio. Prime 10 prenotazioni garantite da Glowee.</p>
+            </div>
+          </div>
+          <div class="prov-card fade-up" style="transition-delay:.1s">
+            <div class="prov-card-icon fi-green">📱</div>
+            <div>
+              <h4>Gestione semplice via WhatsApp</h4>
+              <p>Niente app, niente complicazioni. Ricevi le prenotazioni, confermi, arrivi. Fine.</p>
+            </div>
+          </div>
+          <div class="prov-card fade-up" style="transition-delay:.2s">
+            <div class="prov-card-icon fi-sand">🌟</div>
+            <div>
+              <h4>Clienti fedeli e relazioni vere</h4>
+              <p>Gli anziani apprezzano e fidelizzano. Lavori che danno soddisfazione umana oltre che economica.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="prov-join fade-up">
+        <h3>Unisciti al team Glowee</h3>
+        <p>Compila questo form e ti ricontatteremo entro 24 ore. Nessun impegno obbligatorio.</p>
+        <div class="prov-form">
+          <input class="form-input" type="text" placeholder="Il tuo nome" />
+          <input class="form-input" type="tel" placeholder="Numero di telefono (WhatsApp)" />
+          <input class="form-input" type="text" placeholder="Anni di esperienza" />
+          <a href="https://wa.me/393000000000?text=Ciao!%20Sono%20una%20parrucchiera%20e%20vorrei%20unirmi%20a%20Glowee." class="btn-primary" target="_blank" style="text-align:center;justify-content:center;">
+            Invia via WhatsApp →
+          </a>
+        </div>
+        <p style="font-size:.78rem;color:var(--muted);margin-top:1rem;text-align:center;">Più di 45 parrucchiere già nella nostra rete</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="section-label">Inizia oggi</div>
+    <h2 class="section-title fade-up">Il tuo caro merita di<br/><em style="color:var(--rose-d);font-style:italic">sentirsi bello, a casa sua</em></h2>
+    <p class="section-sub fade-up">Prima visita a soli €5. Soddisfatti o rimborsati. Nessun impegno. Basta un messaggio su WhatsApp.</p>
+    <div class="cta-buttons fade-up">
+      <a href="https://wa.me/393000000000?text=Ciao%20Glowee!%20Vorrei%20prenotare%20la%20prima%20visita%20a%205%20euro." class="btn-whatsapp" target="_blank">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Prenota su WhatsApp — Prima visita €5
+      </a>
+      <a href="tel:+393000000000" class="btn-secondary" style="background:var(--white);">
+        📞 Chiama ora
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo">Glowee</div>
+        <p>Il servizio di parrucchieri a domicilio per anziani. Professionalità, fiducia e cura — a casa tua, in 24 ore.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Servizi</h5>
+        <a href="#">Taglio capelli</a>
+        <a href="#">Messa in piega</a>
+        <a href="#">Manicure base</a>
+        <a href="#">Abbonamento mensile</a>
+      </div>
+      <div class="footer-col">
+        <h5>Azienda</h5>
+        <a href="#">Chi siamo</a>
+        <a href="#">Come funziona</a>
+        <a href="#">Lavora con noi</a>
+        <a href="#">Press & Media</a>
+      </div>
+      <div class="footer-col">
+        <h5>Contatti</h5>
+        <a href="https://wa.me/393000000000" target="_blank">WhatsApp</a>
+        <a href="tel:+393000000000">📞 300 000 0000</a>
+        <a href="mailto:ciao@glowee.it">ciao@glowee.it</a>
+        <a href="#">Pescara, Abruzzo</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 Glowee — P.IVA 00000000000 · <a href="#" style="color:rgba(255,255,255,.5);text-decoration:none;">Privacy</a> · <a href="#" style="color:rgba(255,255,255,.5);text-decoration:none;">Termini</a></div>
+      <div class="footer-socials">
+        <a href="#" class="social-link">f</a>
+        <a href="#" class="social-link">in</a>
+        <a href="#" class="social-link">ig</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('open');
+    }
+
+    // Scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Smooth close menu on link click
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.addEventListener('click', () => {
+        document.getElementById('navLinks').classList.remove('open');
+      });
+    });
+  </script>
+</body>
+</html>
